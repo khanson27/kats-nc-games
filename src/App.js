@@ -1,22 +1,29 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Reviews from "./components/Reviews";
+import Nav from "./components/Nav";
+import Title from "./components/Title";
+import IndividualReview from "./components/IndividualReview";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header>
+          <h1>Kat's Games</h1>
+          <Nav />
+          <Title />
+          <Routes>
+            <Route path="/" element={<Reviews />} />
+            <Route
+              path="/reviews/category/:category_id"
+              element={<Reviews />}
+            />
+            <Route path="/reviews/:review_id" element={<IndividualReview />} />
+          </Routes>
+        </header>
+      </div>
+    </BrowserRouter>
   );
 }
 
