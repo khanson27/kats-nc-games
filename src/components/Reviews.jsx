@@ -15,6 +15,7 @@ const Reviews = () => {
 
   return (
     <>
+      <>{!category_id ? <h2>Review List </h2> : <h2>{category_id}</h2>}</>
       <ReviewCards reviews={reviews} />
     </>
   );

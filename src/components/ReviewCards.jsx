@@ -24,7 +24,7 @@ const ReviewCards = ({ reviews }) => {
                 alt={review.title}
               />
               <p>By {review.owner}</p>
-              <VotingButton votes={review.votes} />
+              <VotingButton votes={review.votes} review_id={review.review_id} />
             </li>
           );
         })}

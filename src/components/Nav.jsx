@@ -13,20 +13,15 @@ const Nav = () => {
 
   return (
     <nav className="nav">
-      <ul>
-        {categories.map((category) => {
-          return (
-            <button>
-              <Link
-                to={`/reviews/category/${category.slug}`}
-                key={category.slug}
-              >
-                {category.slug}
-              </Link>
-            </button>
-          );
-        })}
-      </ul>
+      {categories.map((category) => {
+        return (
+          <button key={category.slug}>
+            <Link to={`/reviews/category/${category.slug}`}>
+              {category.slug}
+            </Link>
+          </button>
+        );
+      })}
     </nav>
   );
 };

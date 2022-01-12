@@ -1,25 +1,31 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 import Reviews from "./components/Reviews";
 import Nav from "./components/Nav";
-import Title from "./components/Title";
+import SortingButton from "./components/SortingButton";
 import IndividualReview from "./components/IndividualReview";
 
 function App() {
+  const [username, setUsername] = useState("jessjelly");
   return (
     <BrowserRouter>
       <div className="App">
         <header>
-          <h1>Kat's Games</h1>
+          <h1>
+            <Link to="/">Kat's Games</Link>
+          </h1>
           <Nav />
-          <Title />
           <Routes>
             <Route path="/" element={<Reviews />} />
             <Route
               path="/reviews/category/:category_id"
               element={<Reviews />}
             />
-            <Route path="/reviews/:review_id" element={<IndividualReview />} />
+            <Route
+              path="/reviews/:review_id"
+              element={<IndividualReview username={username} />}
+            />
           </Routes>
         </header>
       </div>

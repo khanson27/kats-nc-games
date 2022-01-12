@@ -5,7 +5,7 @@ import VotingButton from "./VotingButton";
 import { getCommentsForReview } from "../utils/api";
 import PostComment from "./PostComment";
 
-const IndividualReview = () => {
+const IndividualReview = (props) => {
   const [review, setReview] = useState([]);
   const [comments, setComments] = useState([]);
   const { review_id } = useParams();
@@ -34,24 +34,17 @@ const IndividualReview = () => {
         alt={review.title}
       />
       <h4>by {review.owner}</h4>
-      <VotingButton />
-      <p>{review.votes}</p>
-      <PostComment />
-      <p>All Comments: {review.comment_count}</p>
-      <ul>
-        {comments.map((comment) => {
-          return (
-            <li key={comment.review_id}>
-              <p>{comment.body}</p>
-              <p>by {comment.author}</p>
-              <VotingButton votes={comment.votes} />
-              <p>Vote count: {comment.votes}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <VotingButton votes={review.votes} review_id={review.review_id} />
+
+      <PostComment
+        username={props.username}
+        setComments={setComments}
+        comments={comments}
+        review={review}
+        setReview={setReview}
+      />
     </>
   );
 };
-//Nan for voting button - even though votes is a number, gives errors when try to access votes property of obj
+
 export default IndividualReview;
