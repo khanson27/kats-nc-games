@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import DeleteButton from "./DeleteButton";
 import VotingButton from "./VotingButton";
 
 const CommentList = (props) => {
@@ -14,6 +14,13 @@ const CommentList = (props) => {
               <VotingButton
                 votes={comment.votes}
                 comment_id={comment.comment_id}
+              />
+              <DeleteButton
+                comment_id={comment.comment_id}
+                author={comment.author}
+                username={props.username}
+                setComments={props.setComments}
+                setReview={props.setReview}
               />
             </li>
           );

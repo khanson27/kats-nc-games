@@ -4,22 +4,15 @@ const gamesApi = axios.create({
   baseURL: "http://kats-games.herokuapp.com/api",
 });
 
-export const getReviews = (category_id, order, sortBy) => {
-  let path = "/reviews";
-  if (category_id && sortBy && order) {
-    path += `?category=${category_id}&sort_by=${sortBy}&order=${order}`;
-  } else if (category_id && !sortBy && !order) {
-    path += `?category=${category_id}`;
-  } else if (sortBy && !category_id && !order) {
-    path += `?sort_by=${sortBy}`;
-  } else if (sortBy && order && !category_id) {
-    path += `?sort_by=${sortBy}&order=${order}`;
-  } else if (order && !sortBy && !category_id) {
-    path += `?order=${order}`;
-  }
-  return gamesApi.get(path).then((res) => {
-    return res.data.reviews;
-  });
+export const getReviews = (category, order, sort) => {
+  console.log(order);
+  return gamesApi
+    .get("/reviews", {
+      params: { order: order, sort_by: sort, category: category },
+    })
+    .then((res) => {
+      return res.data.reviews;
+    });
 };
 
 export const getCategories = (category_id) => {
@@ -65,4 +58,10 @@ export const patchVotesForComments = (comment_id, votes) => {
     .then((res) => {
       return res.data.comment.votes;
     });
+};
+
+export const deleteComments = (comment_id) => {
+  return gamesApi.delete(`/comments/${comment_id}`).then((res) => {
+    return res;
+  });
 };

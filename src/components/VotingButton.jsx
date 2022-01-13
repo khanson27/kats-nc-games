@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { patchVotesForComments, patchVotesForReviews } from "../utils/api";
 
 const VotingButton = (p) => {

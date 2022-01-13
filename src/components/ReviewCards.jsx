@@ -1,5 +1,6 @@
 import VotingButton from "./VotingButton";
 import { Link } from "react-router-dom";
+
 const ReviewCards = ({ reviews }) => {
   return (
     <>
@@ -24,6 +25,7 @@ const ReviewCards = ({ reviews }) => {
                 alt={review.title}
               />
               <p>By {review.owner}</p>
+
               <VotingButton votes={review.votes} review_id={review.review_id} />
             </li>
           );

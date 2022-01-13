@@ -1,5 +1,5 @@
 import { postCommentForReview } from "../utils/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import CommentList from "./CommentList";
 
@@ -48,6 +48,8 @@ const PostComment = (props) => {
         comments={props.comments}
         setComments={props.setComments}
         review={props.review}
+        username={props.username}
+        setReview={props.setReview}
       />
     </>
   );

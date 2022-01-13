@@ -33,9 +33,11 @@ const IndividualReview = (props) => {
         }
         alt={review.title}
       />
+      <h4>Designer: {review.designer}</h4>
+      <p>{review.review_body}</p>
       <h4>by {review.owner}</h4>
       <VotingButton votes={review.votes} review_id={review.review_id} />
-
+      <br></br>
       <PostComment
         username={props.username}
         setComments={setComments}
