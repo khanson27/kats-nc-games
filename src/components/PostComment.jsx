@@ -26,6 +26,7 @@ const PostComment = (props) => {
         return [res, ...currComments];
       });
     });
+
     setChangedComment("");
   };
 
