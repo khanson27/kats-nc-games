@@ -11,13 +11,17 @@ const SortingButton = (props) => {
   };
   return (
     <>
-      <button onClick={handleAscendingClick} value="ASC">
+      <button class="button" onClick={handleAscendingClick} value="ASC">
         Ascending
       </button>
-      <button onClick={handleDescendingClick} value="DESC">
+      <button class="button" onClick={handleDescendingClick} value="DESC">
         Descending
       </button>
-      <label for="sort">Sort by</label>
+      <br></br>
+      <label id="sort" for="sort">
+        Sort by
+      </label>
+
       <select
         name={props.selectedSort}
         id={props.selectedSort}

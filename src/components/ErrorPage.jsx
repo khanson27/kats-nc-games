@@ -1,4 +1,5 @@
 const ErrorPage = (props) => {
+  console.log(props);
   if (props.hasOwnProperty("error")) {
     return (
       <div className="error">

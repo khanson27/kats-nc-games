@@ -7,7 +7,7 @@ const ReviewCards = ({ reviews }) => {
       <ul>
         {reviews.map((review) => {
           return (
-            <li key={review.review_id}>
+            <li class="cards" key={review.review_id}>
               <h3>
                 <Link
                   to={`/reviews/${review.review_id}`}
@@ -17,6 +17,7 @@ const ReviewCards = ({ reviews }) => {
                 </Link>
               </h3>
               <img
+                class="reviewCardsImg"
                 src={
                   !review.review_img_url
                     ? "https://image.shutterstock.com/image-vector/no-image-available-vector-hand-260nw-745639717.jpg"
@@ -26,7 +27,7 @@ const ReviewCards = ({ reviews }) => {
               />
               <p>By {review.owner}</p>
 
-              <VotingButton votes={review.votes} review_id={review.review_id} />
+              <VotingButton votes={review.votes} id={review.review_id} />
             </li>
           );
         })}
