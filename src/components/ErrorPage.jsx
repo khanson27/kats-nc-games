@@ -1,6 +1,5 @@
 const ErrorPage = (props) => {
   const { error } = props;
-  console.log(props);
   if (error) {
     return (
       <div className="error">

@@ -2,7 +2,7 @@
 
 # Background
 
-This was created as part of the Northcoders Frontend project. The purpose of this was to create a useable frontend application for the API created in the backend project phase. This project was created in order to utilise the React framework to create usable components.
+This was created as part of the Northcoders Frontend project. The purpose of this was to create a useable frontend application for the API created in the backend project phase. This project was created in order to utilise the React framework to create reusable components.
 
 # How to access this project
 
@@ -48,3 +48,5 @@ npm install
 Readme for the backend: https://github.com/khanson27/nc_games
 
 Hosted API: https://kats-games.herokuapp.com/api
+
+Hosted Website: https://katsgames.netlify.app/
