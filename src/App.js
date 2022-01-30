@@ -14,6 +14,7 @@ function App() {
           <h1>
             <Link to="/">Kat's Games</Link>
           </h1>
+          <h3>You are logged in as {username}</h3>
           <Nav />
           <Routes>
             <Route path="/" element={<Reviews />} />

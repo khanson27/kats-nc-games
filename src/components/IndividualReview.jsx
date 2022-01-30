@@ -13,11 +13,12 @@ const IndividualReview = (props) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { review_id } = useParams();
+  const { username } = props;
 
   useEffect(() => {
+    setIsLoading(true);
     getIndividualReview(review_id)
       .then((individualReviewFromApi) => {
-        setIsLoading(true);
         setReview(individualReviewFromApi);
         setIsLoading(false);
       })
@@ -27,9 +28,9 @@ const IndividualReview = (props) => {
   }, [review_id]);
 
   useEffect(() => {
+    setIsLoading(true);
     getCommentsForReview(review_id)
       .then((commentsForReviewFromApi) => {
-        setIsLoading(true);
         setComments(commentsForReviewFromApi);
         setIsLoading(false);
       })
@@ -50,7 +51,7 @@ const IndividualReview = (props) => {
         <>
           <h3>{review.title}</h3>
           <img
-            class="individualReviewImg"
+            className="individualReviewImg"
             src={
               !review.review_img_url
                 ? "https://image.shutterstock.com/image-vector/no-image-available-vector-hand-260nw-745639717.jpg"
@@ -58,15 +59,21 @@ const IndividualReview = (props) => {
             }
             alt={review.title}
           />
-          <h4 class="individualReviewHeader">Designer: {review.designer}</h4>
-          <p class="reviewBody">{review.review_body}</p>
-          <h4 class="individualReviewHeader">by {review.owner}</h4>{" "}
+          <h4 className="individualReviewHeader">
+            Designer: {review.designer}
+          </h4>
+          <p className="reviewBody">{review.review_body}</p>
+          <h4 className="individualReviewHeader">by {review.owner}</h4>{" "}
         </>
       )}
-      <VotingButton votes={review.votes} review_id={review.review_id} />
+      <VotingButton
+        votes={review.votes}
+        id={review.review_id}
+        category="reviews"
+      />
       <br></br>
       <PostComment
-        username={props.username}
+        username={username}
         setComments={setComments}
         comments={comments}
         review={review}

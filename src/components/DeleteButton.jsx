@@ -4,17 +4,18 @@ import LoadingIcon from "./LoadingIcon";
 
 const DeleteButton = (props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { comment_id, setReview, setComments, author, username } = props;
 
   const handleClick = () => {
-    deleteComments(props.comment_id).then((res) => {
-      setIsLoading(true);
-      props.setComments((currComment) => {
+    setIsLoading(true);
+    deleteComments(comment_id).then((res) => {
+      setComments((currComment) => {
         const copyComments = currComment.filter((comment) => {
           return comment.comment_id !== props.comment_id;
         });
         return copyComments;
       });
-      props.setReview((prev) => {
+      setReview((prev) => {
         const copiedReview = { ...prev };
         copiedReview.comment_count--;
         return copiedReview;
@@ -26,15 +27,11 @@ const DeleteButton = (props) => {
     <>
       {isLoading ? (
         <LoadingIcon />
-      ) : props.author === props.username ? (
+      ) : author === username ? (
         <button class="button" onClick={handleClick}>
           Delete
         </button>
-      ) : (
-        <button class="button" disabled>
-          Delete
-        </button>
-      )}
+      ) : null}
     </>
   );
 };

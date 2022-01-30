@@ -10,6 +10,7 @@ const PostComment = (props) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { review_id } = useParams();
+  const { setReview, username, comments, setComments, review } = props;
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -18,12 +19,11 @@ const PostComment = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const username = props.username;
     const commentPost = { body: changedComment, username: username };
+    setIsLoading(true);
     postCommentForReview(review_id, commentPost)
       .then((res) => {
-        setIsLoading(true);
-        props.setReview((prev) => {
+        setReview((prev) => {
           const copiedReview = { ...prev };
           copiedReview.comment_count += 1;
           return copiedReview;
@@ -50,25 +50,27 @@ const PostComment = (props) => {
         <LoadingIcon />
       ) : (
         <form class="commentForm" onSubmit={handleSubmit}>
-          <p>You are logged in as {props.username} </p>
+          <p>You are logged in as {username} </p>
           <br></br>
-          <label htmlFor="commentInput">Write your comment here:</label>
           <br></br>
-          <input
+          <textarea
             type="text"
             onChange={handleChange}
             value={changedComment}
-          ></input>
+            placeholder="Write your comment here"
+            cols="30"
+            rows="5"
+          ></textarea>
           <label htmlFor="submit"></label>
           <input type="submit"></input>
         </form>
       )}
       <CommentList
-        comments={props.comments}
-        setComments={props.setComments}
-        review={props.review}
-        username={props.username}
-        setReview={props.setReview}
+        comments={comments}
+        setComments={setComments}
+        review={review}
+        username={username}
+        setReview={setReview}
       />
     </>
   );

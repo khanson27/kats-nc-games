@@ -1,49 +1,23 @@
 import { useState } from "react";
-import { patchVotesForComments, patchVotesForReviews } from "../utils/api";
+import { patchVotes } from "../utils/api";
 import ErrorPage from "./ErrorPage";
 
-const VotingButton = (p) => {
+const VotingButton = (props) => {
   const [voteModifier, setVoteModifier] = useState(0);
   const [error, setError] = useState(null);
+  const { votes, id, category } = props;
 
-  const handleClickUp = (e) => {
-    setVoteModifier((prev) => prev + 1);
-    {
-      !p.comment_id
-        ? patchVotesForReviews(p.review_id, 1)
-            .then((res) => {
-              return res;
-            })
-            .catch((err) => {
-              setError(err);
-            })
-        : patchVotesForComments(p.comment_id, 1)
-            .then((res) => {
-              return res;
-            })
-            .catch((err) => {
-              setError(err);
-            });
-    }
-  };
-
-  const handleClickDown = (e) => {
-    setVoteModifier((prev) => prev - 1);
-    {
-      !p.comment_id
-        ? patchVotesForReviews(p.review_id, -1)
-            .then((res) => {
-              return res;
-            })
-            .catch((err) => {
-              setError(err);
-            })
-        : patchVotesForComments(p.comment_id, -1)
-            .then((res) => {
-              return res;
-            })
-            .catch((err) => setError(err));
-    }
+  const handleClick = (e) => {
+    const voteAmount = Number(e.target.value);
+    setVoteModifier((prev) => prev + Number(e.target.value));
+    patchVotes(id, voteAmount, category)
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err);
+      });
   };
   if (error) {
     return <ErrorPage error={error} />;
@@ -51,13 +25,13 @@ const VotingButton = (p) => {
 
   return (
     <>
-      <button class="button" onClick={handleClickUp}>
+      <button className="button" value={1} onClick={handleClick}>
         😸
       </button>
-      <button class="button" onClick={handleClickDown}>
+      <button className="button" value={-1} onClick={handleClick}>
         😿
       </button>
-      <p>Vote Count:{p.votes + voteModifier}</p>
+      <p>Vote Count:{votes + voteModifier}</p>
     </>
   );
 };

@@ -10,9 +10,9 @@ const Nav = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getCategories()
       .then((categoriesFromApi) => {
-        setIsLoading(true);
         setCategories(categoriesFromApi);
         setIsLoading(false);
       })
@@ -31,9 +31,9 @@ const Nav = () => {
       ) : (
         categories.map((category) => {
           return (
-            <button class="bouncy" key={category.slug}>
+            <button key={category.slug}>
               <Link to={`/reviews/category/${category.slug}`}>
-                {category.slug}
+                {category.slug.replace(/-/g, " ")}
               </Link>
             </button>
           );

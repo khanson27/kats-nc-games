@@ -15,9 +15,9 @@ const Reviews = () => {
   const { category } = useParams();
 
   useEffect(() => {
+    setIsLoading(true);
     getReviews(category, selectedOrder, selectedSort)
       .then((reviewsFromApi) => {
-        setIsLoading(true);
         setReviews(reviewsFromApi);
         setIsLoading(false);
       })
@@ -37,6 +37,13 @@ const Reviews = () => {
         <LoadingIcon />
       ) : (
         <>
+          {!category ? (
+            <h2>Review List </h2>
+          ) : (
+            <h2>
+              {category.includes("-") ? category.replace(/-/g, " ") : category}
+            </h2>
+          )}
           <SortingButton
             setSelectedOrder={setSelectedOrder}
             setSelectedSort={setSelectedSort}
@@ -44,7 +51,7 @@ const Reviews = () => {
             selectedOrder={selectedOrder}
             selectedSort={selectedSort}
           />
-          {!category ? <h2>Review List </h2> : <h2>{category}</h2>}
+
           <ReviewCards reviews={reviews} />
         </>
       )}

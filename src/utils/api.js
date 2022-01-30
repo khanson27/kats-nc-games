@@ -5,7 +5,6 @@ const gamesApi = axios.create({
 });
 
 export const getReviews = (category, order, sort) => {
-  console.log(order);
   return gamesApi
     .get("/reviews", {
       params: { order: order, sort_by: sort, category: category },
@@ -44,19 +43,16 @@ export const postCommentForReview = (review_id, { body, username }) => {
     });
 };
 
-export const patchVotesForReviews = (review_id, votes) => {
+export const patchVotes = (id, votes, category) => {
+  console.log(id, votes, category);
   return gamesApi
-    .patch(`/reviews/${review_id}`, { inc_votes: votes })
+    .patch(`/${category}/${id}`, { inc_votes: votes })
     .then((res) => {
-      return res.data.review.votes;
-    });
-};
-
-export const patchVotesForComments = (comment_id, votes) => {
-  return gamesApi
-    .patch(`/comments/${comment_id}`, { inc_votes: votes })
-    .then((res) => {
-      return res.data.comment.votes;
+      if (category === "reviews") {
+        return res.data.review.votes;
+      } else {
+        return res.data.comment.votes;
+      }
     });
 };
 

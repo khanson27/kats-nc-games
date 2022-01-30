@@ -1,39 +1,41 @@
 const SortingButton = (props) => {
-  const handleAscendingClick = (e) => {
-    props.setSelectedOrder("ASC");
+  const { selectedOrder, selectedSort, setSelectedSort, setSelectedOrder } =
+    props;
+
+  const handleClick = (e) => {
+    setSelectedOrder(e.target.value);
   };
 
-  const handleDescendingClick = () => {
-    props.setSelectedOrder("DESC");
-  };
   const handleChange = (e) => {
-    props.setSelectedSort(e.target.value);
+    setSelectedSort(e.target.value);
   };
   return (
     <>
-      <button class="button" onClick={handleAscendingClick} value="ASC">
-        Ascending
-      </button>
-      <button class="button" onClick={handleDescendingClick} value="DESC">
-        Descending
-      </button>
+      {selectedOrder === "DESC" ? (
+        <button class="button" onClick={handleClick} value="ASC">
+          Ascending
+        </button>
+      ) : (
+        <button class="button" onClick={handleClick} value="DESC">
+          Descending
+        </button>
+      )}
       <br></br>
-      <label id="sort" for="sort">
-        Sort by
-      </label>
-
-      <select
-        name={props.selectedSort}
-        id={props.selectedSort}
-        onChange={handleChange}
-      >
-        <option value="choose" selected disabled>
-          Choose an option
-        </option>
-        <option value="created_at">Created At</option>
-        <option value="comment_count">Comment Count</option>
-        <option value="votes">Votes</option>
-      </select>
+      <h4>
+        Sorted by:{" "}
+        {selectedSort.includes("_")
+          ? selectedSort.replace("_", " ")
+          : selectedSort}
+      </h4>
+      <button onClick={handleChange} value="created_at">
+        created at
+      </button>
+      <button onClick={handleChange} value="comment_count">
+        comment count
+      </button>
+      <button onClick={handleChange} value="votes">
+        votes
+      </button>
     </>
   );
 };
