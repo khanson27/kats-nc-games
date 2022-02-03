@@ -1,5 +1,14 @@
 # Kat's NC-Games
 
+# Website: 
+Hosted Website: https://katsgames.netlify.app/
+
+# To access the backend:
+
+Readme for the backend: https://github.com/khanson27/nc_games
+
+Hosted API: https://kats-games.herokuapp.com/api
+
 # Background
 
 This was created as part of the Northcoders Frontend project. The purpose of this was to create a useable frontend application for the API created in the backend project phase. This project was created in order to utilise the React framework to create reusable components.
@@ -43,10 +52,4 @@ In order to install these you will need to run
 npm install
 ```
 
-# To access the backend:
 
-Readme for the backend: https://github.com/khanson27/nc_games
-
-Hosted API: https://kats-games.herokuapp.com/api
-
-Hosted Website: https://katsgames.netlify.app/
